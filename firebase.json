@@ -13,5 +13,10 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "emulators": {
+    "hosting": {
+      "port": "4000"
+    }
   }
 }
