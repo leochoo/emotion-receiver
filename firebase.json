@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "emotion-receiver",
+    "target": "receiver",
     "public": "dist",
     "ignore": [
       "firebase.json",
