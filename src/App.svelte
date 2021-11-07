@@ -5,6 +5,18 @@
 
   import { doc, onSnapshot } from "firebase/firestore";
 
+  // const pcaPath = require.resolve("../node_modules/@chirimen/pca9685/index.js");
+  // console.log("pcaPath:", pcaPath);
+  // const poly = require("../node_modules/@chirimen-raspi/polyfill/polyfill.js");
+
+  // import { PCA9685 } from "../node_modules/@chirimen/pca9685/pca9685.js";
+  // import { requestI2CAccess } from "../node_modules/@chirimen-raspi/polyfill/polyfill.js";
+
+  // import { PCA9685 } from "@chirimen/pca9685/pca9685";
+
+  import * as pca from "@chirimen/pca9685";
+  import * as poly from "@chirimen-raspi/polyfill";
+
   let score = 0;
 
   let angleState = 0;
@@ -15,9 +27,9 @@
   });
 
   async function trigger() {
-    var i2cAccess = await navigator.requestI2CAccess();
-    var port = i2cAccess.ports.get(1);
-    var pca9685 = new PCA9685(port, 0x40);
+    var i2cAccess = await poly.requestI2CAccess();
+    var port = poly.i2cAccess.ports.get(1);
+    var pca9685 = new pca.PCA9685(port, 0x40);
 
     console.log("i2cAccess", i2cAccess);
     console.log("PCA9685: ", pca9685);
