@@ -28,7 +28,7 @@
 
   async function trigger() {
     var i2cAccess = await poly.requestI2CAccess();
-    var port = poly.i2cAccess.ports.get(1);
+    var port = i2cAccess.ports.get(1);
     var pca9685 = new pca.PCA9685(port, 0x40);
 
     console.log("i2cAccess", i2cAccess);
