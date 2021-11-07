@@ -13,6 +13,8 @@
     "vite": "^2.6.4"
   },
   "dependencies": {
+    "@chirimen-raspi/polyfill": "^1.0.6",
+    "@chirimen/pca9685": "^1.0.7",
     "firebase": "^9.2.0"
   }
 }
