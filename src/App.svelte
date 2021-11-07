@@ -5,8 +5,11 @@
 
   import { doc, onSnapshot } from "firebase/firestore";
 
+  let score = 0;
+
   const unsub = onSnapshot(doc(db, "events", "testEvent"), (doc) => {
     console.log("Current data: ", doc.data());
+    score = doc.data().totalScore;
   });
 </script>
 
@@ -14,11 +17,11 @@
   <img src={logo} alt="Svelte Logo" />
   <h1>Emotion Receiver</h1>
 
-  <Counter />
-
   <p>みんなの応援が届いてるよ！</p>
 
   <p>Feel your audience cheering for you!</p>
+
+  <h2>Score {score}</h2>
 </main>
 
 <style>
