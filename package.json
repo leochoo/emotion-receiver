@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "deploy": "npm run build && firebase deploy --only hosting:receiver"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
@@ -13,8 +14,8 @@
     "vite": "^2.6.4"
   },
   "dependencies": {
-    "@chirimen-raspi/polyfill": "^1.0.6",
-    "@chirimen/pca9685": "^1.0.7",
+    "@chirimen-raspi/polyfill": "latest",
+    "@chirimen/pca9685": "latest",
     "firebase": "^9.2.0"
   }
 }

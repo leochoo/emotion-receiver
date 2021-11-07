@@ -39,6 +39,11 @@
   }
 </script>
 
+<!-- <svelte:head>
+  <script src="node_modules/@chirimen-raspi/polyfill/polyfill.js"></script>
+  <script src="node_modules/@chirimen/pca9685/index.js"></script>
+</svelte:head> -->
+
 <main>
   <img src={logo} alt="Svelte Logo" />
   <h1>Emotion Receiver</h1>
