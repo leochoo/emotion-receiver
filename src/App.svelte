@@ -1,6 +1,13 @@
 <script>
   import logo from "./assets/svelte.png";
   import Counter from "./lib/Counter.svelte";
+  import { db } from "../firebaseConfig.js";
+
+  import { doc, onSnapshot } from "firebase/firestore";
+
+  const unsub = onSnapshot(doc(db, "events", "testEvent"), (doc) => {
+    console.log("Current data: ", doc.data());
+  });
 </script>
 
 <main>
