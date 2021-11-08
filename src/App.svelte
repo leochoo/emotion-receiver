@@ -1,7 +1,7 @@
 <script>
   import logo from "./assets/svelte.png";
   import Counter from "./lib/Counter.svelte";
-  import { db } from "../firebaseConfig.js";
+  import { db } from "../firebase.js";
 
   import { doc, onSnapshot } from "firebase/firestore";
 
