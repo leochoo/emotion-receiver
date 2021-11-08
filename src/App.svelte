@@ -52,8 +52,8 @@
 </script>
 
 <svelte:head>
-  <script src="node_modules/@chirimen-raspi/polyfill/polyfill.js"></script>
-  <script src="node_modules/@chirimen/pca9685/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@chirimen-raspi/polyfill"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@chirimen/pca9685"></script>
 </svelte:head>
 
 <main>
