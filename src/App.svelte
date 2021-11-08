@@ -65,11 +65,12 @@
   <p>Feel your audience cheering for you!</p>
 
   <h2>Score {score}</h2>
-  {#if score > 10000}
+  {#if score > 15000}
     <h1>FLY!!!</h1>
+    {trigger()}
   {/if}
   <div>Angle Text: {angleState}</div>
-  <button on:click={trigger}>Fly me</button>
+  <!-- <button on:click={trigger}>Fly me</button> -->
 </main>
 
 <style>
