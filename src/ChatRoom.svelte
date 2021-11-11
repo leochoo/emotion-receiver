@@ -7,6 +7,7 @@
   import { onMount } from "svelte";
 
   let score;
+  let angleState = 0;
 
   const unsub = onSnapshot(doc(db, "chats", id), (doc) => {
     console.log("Current data: ", doc.data());
