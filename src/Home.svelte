@@ -2,8 +2,8 @@
 </script>
 
 <main>
-  <h1>Team Emotion</h1>
-  <p>あなたの応援の気持ちを送りましょう！</p>
+  <h1>Emotion Receiver</h1>
+  <p>みんなの応援が届いてる！</p>
 </main>
 
 <style>

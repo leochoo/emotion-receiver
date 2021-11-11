@@ -1,59 +1,19 @@
 <script>
-  import logo from "./assets/svelte.png";
-  import Counter from "./lib/Counter.svelte";
-  import { db } from "../firebase.js";
+  import "bootswatch/dist/litera/bootstrap.min.css";
+  import Home from "./Home.svelte";
+  import Login from "./Login.svelte";
+  import ChatList from "./ChatList.svelte";
+  import ChatRoom from "./ChatRoom.svelte";
 
-  import { doc, onSnapshot } from "firebase/firestore";
+  import { Router, Link, Route } from "svelte-routing";
 
-  // const pcaPath = require.resolve("../node_modules/@chirimen/pca9685/index.js");
-  // console.log("pcaPath:", pcaPath);
-  // const poly = require("../node_modules/@chirimen-raspi/polyfill/polyfill.js");
+  import { userStatus } from "./stores";
 
-  // import { PCA9685 } from "../node_modules/@chirimen/pca9685/pca9685.js";
-  // import { requestI2CAccess } from "../node_modules/@chirimen-raspi/polyfill/polyfill.js";
-
-  // import { PCA9685 } from "@chirimen/pca9685/pca9685";
-
-  // import * as pca from "@chirimen/pca9685";
-  // import * as poly from "@chirimen-raspi/polyfill";
-
-  let score = 0;
-
-  let angleState = 0;
-
-  // const unsub = onSnapshot(doc(db, "events", "testEvent"), (doc) => {
-  //   console.log("Current data: ", doc.data());
-  //   score = doc.data().totalScore;
-  // });
-
-  const unsub = onSnapshot(doc(db, "chats", "iotdemo"), (doc) => {
-    console.log("Current data: ", doc.data());
-    score = doc.data().totalScore;
+  let user_status;
+  userStatus.subscribe((value) => {
+    user_status = value;
+    console.log("user status changed", value);
   });
-
-  async function trigger() {
-    var i2cAccess = await navigator.requestI2CAccess();
-    var port = i2cAccess.ports.get(1);
-    var pca9685 = new PCA9685(port, 0x40);
-
-    console.log("i2cAccess", i2cAccess);
-    console.log("PCA9685: ", pca9685);
-
-    var angle = 0;
-    // console.log("angle"+angle);
-    // servo setting for sg90
-    // Servo PWM pulse: min=0.0011[sec], max=0.0019[sec] angle=+-60[deg]
-    await pca9685.init(0.001, 0.002, 30);
-    for (let i = 0; i < 10; i++) {
-      console.log("loop i", i);
-      angle = angle <= -30 ? 30 : -30;
-      // console.log("angle"+angle);
-      await pca9685.setServo(0, angle);
-      // console.log('value:', angle);
-      angleState = angle;
-      await sleep(1000);
-    }
-  }
 </script>
 
 <svelte:head>
@@ -61,63 +21,47 @@
   <script src="https://cdn.jsdelivr.net/npm/@chirimen/pca9685"></script>
 </svelte:head>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Emotion Receiver</h1>
+<Router>
+  <main>
+    <Home />
+    <Login />
+    <!-- <div>user_status: {user_status}</div> -->
 
-  <p>みんなの応援が届いてるよ！</p>
+    <Route path="chat/:id" let:params>
+      <ChatRoom id={params.id} />
+    </Route>
 
-  <p>Feel your audience cheering for you!</p>
-
-  <h2>Score {score}</h2>
-  {#if score > 15000}
-    <h1>FLY!!!</h1>
-    {trigger()}
-  {/if}
-  <div>Angle Text: {angleState}</div>
-  <!-- <button on:click={trigger}>Fly me</button> -->
-</main>
+    <Route path="/">
+      {#if user_status}
+        <div>
+          Welcome {user_status["uid"]} !
+        </div>
+        <ChatList uid={user_status.uid} />
+      {/if}
+    </Route>
+  </main>
+</Router>
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  }
-
   main {
     text-align: center;
     padding: 1em;
     margin: 0 auto;
   }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
   h1 {
     color: #ff3e00;
     text-transform: uppercase;
-    font-size: 4rem;
+    font-size: 4em;
     font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
   }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
+  @media (min-width: 640px) {
+    main {
       max-width: none;
     }
+  }
 
-    p {
-      max-width: none;
-    }
+  :root {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 </style>
