@@ -21,7 +21,12 @@
 
   let angleState = 0;
 
-  const unsub = onSnapshot(doc(db, "events", "testEvent"), (doc) => {
+  // const unsub = onSnapshot(doc(db, "events", "testEvent"), (doc) => {
+  //   console.log("Current data: ", doc.data());
+  //   score = doc.data().totalScore;
+  // });
+
+  const unsub = onSnapshot(doc(db, "chats", "iotdemo"), (doc) => {
     console.log("Current data: ", doc.data());
     score = doc.data().totalScore;
   });

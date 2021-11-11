@@ -16,7 +16,12 @@
   "dependencies": {
     "@chirimen-raspi/polyfill": "latest",
     "@chirimen/pca9685": "latest",
-    "firebase": "^9.2.0"
+    "firebase": "^9.2.0",
+    "bootswatch": "^5.1.3",
+    "rxfire": "^6.0.3",
+    "rxjs": "^7.4.0",
+    "svelte-routing": "^1.6.0"
+
   }
   
 }
